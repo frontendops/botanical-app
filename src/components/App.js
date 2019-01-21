@@ -1,6 +1,8 @@
 import React from "react";
 import NavBar from './NavBar';
 
+import Home from './Home';
+
 class App extends React.Component {
     render() {
 
@@ -8,6 +10,8 @@ class App extends React.Component {
             
             <div className="ui container">
                 <NavBar />
+                
+                <Home />
             </div>
         );
     }
