@@ -1,19 +1,18 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class PlantCard extends Component {
-    render () {
+const PlantCard = ({img, name, description, waterDate}) => {
         return (
             <div class="ui card">
                 <div class="image">
-                    <img src={this.props.img} alt="plant name"/>
+                    <img src={img} alt="plant name"/>
                 </div>
                 <div class="content">
-                    <div class="header">Kristy</div>
+                    <div class="header">{name}</div>
                     <div class="meta">
-                    <span class="date">Last watered 3 mo ago</span>
+                    <span class="date">{`Water in ${waterDate} days`}</span>
                     </div>
                     <div class="description">
-                    Kristy is an art director living in New York.
+                    {description}
                     </div>
                 </div>
                 <div class="extra content">
@@ -24,7 +23,6 @@ class PlantCard extends Component {
                 </div>
             </div>
         )
-    }
 }
 
 export default PlantCard

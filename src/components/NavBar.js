@@ -5,8 +5,8 @@ const NavBar = () => {
         <div className="ui menu">
             <div className="item">Plantly</div>
             <div className="right menu">
-                <div className="item">Log in</div>
-                <div className="item">New Plant</div>
+                <div className="item ui olive basic button">Log in</div>
+                <div className="item ui grey basic button">New Plant</div>
             </div>
             
         </div>
