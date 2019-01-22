@@ -1,11 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { Link } from "react-router-dom";
 
 const PlantCard = ({img, name, description, waterDate}) => {
         return (
             <div class="ui card">
-                <div class="image">
+                
+                <Link to="/view" className="image">
                     <img src={img} alt="plant name"/>
-                </div>
+                </Link>
+                
+      
                 <div class="content">
                     <div class="header">{name}</div>
                     <div class="meta">
@@ -17,12 +21,16 @@ const PlantCard = ({img, name, description, waterDate}) => {
                 </div>
                 <div class="extra content">
                     <span className="right floated">
+                    <Link to="/create">
                     <i class="edit icon"></i>
+                    </Link>
                     </span>
-                    <a href="https://www.google.com">
+
+                    
+                    <Link to="notes">
                     <i class="edit outline icon"></i>
                     notes
-                    </a>
+                    </Link>
                 </div>
             </div>
         )

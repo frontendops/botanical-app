@@ -7,6 +7,12 @@ import { connect } from 'react-redux';
 class Home extends Component {
     render () {
         return (
+            <div className="ui container">
+        <div class="item">
+        <div class="ui right floated th large icon">
+        <i class="th large icon"></i>
+        </div>
+        </div>
             <div className="ui centered cards">
                 {this.props.plants.map(plant => (
                     
@@ -18,6 +24,7 @@ class Home extends Component {
                     />
                 )
                 )}
+            </div>
             </div>
         )
     }

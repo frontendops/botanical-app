@@ -17,10 +17,21 @@ class CreatePlant extends Component {
                 </div>
 
                 <div class="field">
+                    <label>Select image</label>
+                    <input type="file" name="plant-image"  accept="image/png, image/jpeg, image/jpg" />
+                </div>
+
+                <div class="field">
                     <label>Next Water Date</label>
                     <input type="date"/>
                 </div>
-                <button class="ui olive button" type="submit">Submit</button>
+
+                <div class="field">
+                    <label>Plant notes</label>
+                    <textarea rows="4" placeholder="write any notes in here. (describe anything that you find fascinating)"></textarea>
+                </div>
+
+                <button class="ui olive button" type="submit">Save plant</button>
                 </form>
             </div>
         )
