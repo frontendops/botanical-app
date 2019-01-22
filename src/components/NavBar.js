@@ -1,12 +1,20 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
     return (
         <div className="ui menu">
-            <div className="item">Plantly</div>
+                <Link to="/">
+                    <div className="item">Plantly</div>
+                </Link>
             <div className="right menu">
-                <div className="item ui olive basic button">Log in</div>
+                <Link to="/">
+                    <div className="item ui olive basic button">Log in</div>
+                </Link>
+
+                <Link to="/create">
                 <div className="item ui grey basic button">New Plant</div>
+                </Link>
             </div>
             
         </div>

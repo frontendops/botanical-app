@@ -16,6 +16,9 @@ const PlantCard = ({img, name, description, waterDate}) => {
                     </div>
                 </div>
                 <div class="extra content">
+                    <span className="right floated">
+                    <i class="edit icon"></i>
+                    </span>
                     <a href="https://www.google.com">
                     <i class="edit outline icon"></i>
                     notes
