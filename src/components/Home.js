@@ -1,18 +1,24 @@
 import React, { Component } from 'react'
 import PlantCard from './PlantCard';
+import AltPlantCard from './AltPlantCard';
+import './styles/home.css';
 
 import { connect } from 'react-redux';
 
 
 class Home extends Component {
-    render () {
-        return (
-            <div className="ui container">
-        <div class="item">
-        <div class="ui right floated th large icon">
-        <i class="th large icon"></i>
-        </div>
-        </div>
+    state = {
+        listView: false,
+
+    }
+
+    changeView = () => {
+        this.setState({ listView: !this.state.listView});
+    }
+
+    renderCards = () => {
+        if (this.state.listView === true) {
+            return (
             <div className="ui centered cards">
                 {this.props.plants.map(plant => (
                     
@@ -25,6 +31,34 @@ class Home extends Component {
                 )
                 )}
             </div>
+            )
+        } else {
+            return (
+                <div className="ui four doubling cards">
+                {this.props.plants.map(plant => (
+                    
+                    <AltPlantCard 
+                    img={plant.img}
+                    name={plant.name}
+                    waterDate={plant.waterDate}
+                    />
+                )
+                )}
+            </div>
+            )
+        }
+    }
+
+    render () {
+        
+        return (
+            <div className="ui container">
+        <div class="ui clearing segment">
+        <div onClick={this.changeView} class="list-view">
+        <i class="th large icon"></i>
+        </div>
+        </div>
+            {this.renderCards()}
             </div>
         )
     }
