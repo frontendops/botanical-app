@@ -1,41 +1,77 @@
 import React, { Component } from 'react'
+import { Field, reduxForm } from "redux-form";
+import FileInput from './FileInput';
 
 
 class CreatePlant extends Component {
+
+    renderInput = (formProps) => {
+        return (
+            <input placeholder={formProps.placeholder} 
+            type={formProps.type}
+            {...formProps.input}/>
+        )
+    }
+
+    renderTextArea = (formProps) => {
+        return (
+            <textarea placeholder={formProps.placeholder} 
+            rows={formProps.rows}
+            {...formProps.input}>
+
+            </textarea>
+        )
+    }
+
+    submitForm = (formValues) => {
+       console.log(formValues);
+       
+    }
+
     render () {
         return (
             <div className="ui container">
-             <form class="ui form">
-                <div class="field">
+             <form onSubmit={this.props.handleSubmit(this.submitForm)} 
+             className="ui form">
+                <div className="field">
                     <label>Plant name</label>
-                    <input type="text" name="plant-name" placeholder="Enter name of plant" />
+                    <Field name="name"  component={this.renderInput}
+                    placeholder="Enter name of plant"
+                    />
+                    
                 </div>
 
-                <div class="field">
+                <div className="field">
                     <label>Plant description</label>
-                    <input type="text" name="plant-description" placeholder="Enter description of plant"/>
+                    <Field name="description"  component={this.renderInput}
+                    placeholder="Enter description of plant"
+                    />
+                    
                 </div>
 
-                <div class="field">
+                <div className="field">
                     <label>Select image</label>
-                    <input type="file" name="plant-image"  accept="image/png, image/jpeg, image/jpg" />
+                    <Field name="image" type="file" component={FileInput} />
                 </div>
 
-                <div class="field">
+                <div className="field">
                     <label>Next Water Date</label>
-                    <input type="date"/>
+                    <Field name="date" type="date" component={this.renderInput} />
                 </div>
 
-                <div class="field">
+                <div className="field">
                     <label>Plant notes</label>
-                    <textarea rows="4" placeholder="write any notes in here. (describe anything that you find fascinating)"></textarea>
+                    <Field component={this.renderTextArea} name="notes" rows="4" placeholder="write any notes in here. (describe anything that you find fascinating)" />
+            
                 </div>
 
-                <button class="ui olive button" type="submit">Save plant</button>
+                <button className="ui olive button" type="submit">Save plant</button>
                 </form>
             </div>
         )
     }
 }
 
-export default CreatePlant;
+export default reduxForm({
+    form: 'createPlant'
+})(CreatePlant);

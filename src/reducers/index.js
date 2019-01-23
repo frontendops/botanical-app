@@ -1,4 +1,8 @@
 import { combineReducers } from 'redux';
+import { GET_PLANTS, ADD_PLANT, DELETE_PLANT, EDIT_PLANT } from '../actions/types';
+
+import {reducer as formReducer} from 'redux-form';
+
 
 const plantInfoReducer = () => {
     return [
@@ -24,6 +28,19 @@ const plantInfoReducer = () => {
         },
     ]
 }
+//add all actions after backend
+function apiReducer(state = plantInfoReducer, action) {
+  switch (action.type) {
+    case GET_PLANTS:
+      return {...state}
+
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
     plantInfo: plantInfoReducer,
+    form: formReducer,
+    apiReducer
 })
