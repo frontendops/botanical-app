@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
 import { GET_PLANTS, ADD_PLANT, DELETE_PLANT, EDIT_PLANT } from '../actions/types';
+import _ from 'lodash';
 
 import {reducer as formReducer} from 'redux-form';
 
 
-const plantInfoReducer = () => {
+const plantInfoSignedOut = () => {
     return [
         { img: 'https://farm5.staticflickr.com/4863/45878440395_b6fb181478_z_d.jpg',
           name: 'Lilly',
@@ -28,11 +29,17 @@ const plantInfoReducer = () => {
         },
     ]
 }
+
+
+
 //add all actions after backend
-function apiReducer(state = plantInfoReducer, action) {
+function apiReducer(state = {}, action) {
   switch (action.type) {
     case GET_PLANTS:
-      return {...state}
+      return {...state, ..._.mapKeys(action.payload, 'name')};
+
+    case ADD_PLANT:
+      return {...state, [action.payload.id]: action.payload};
 
     default:
       return state;
@@ -40,7 +47,7 @@ function apiReducer(state = plantInfoReducer, action) {
 }
 
 export default combineReducers({
-    plantInfo: plantInfoReducer,
+    plantInfo: plantInfoSignedOut,
     form: formReducer,
     apiReducer
 })

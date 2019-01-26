@@ -4,6 +4,7 @@ import AltPlantCard from './AltPlantCard';
 import './styles/home.css';
 
 import { connect } from 'react-redux';
+import { getPlants } from '../actions';
 
 
 class Home extends Component {
@@ -13,6 +14,7 @@ class Home extends Component {
     }
 
     changeView = () => {
+        console.log(this.props.plantsSignedIn);
         this.setState({ listView: !this.state.listView});
     }
 
@@ -49,6 +51,11 @@ class Home extends Component {
         }
     }
 
+    componentDidMount () {
+        this.props.getPlants();
+    }
+    
+
     render () {
         
         return (
@@ -66,7 +73,9 @@ class Home extends Component {
 
 function mapStateToProps(state) {
     return {
-        plants: state.plantInfo
+        plants: state.plantInfo,
     };
 }
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps, {
+    getPlants
+})(Home)

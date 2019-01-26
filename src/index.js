@@ -5,6 +5,9 @@ import {Provider} from 'react-redux';
 import {createStore, applyMiddleware, compose} from 'redux';
 import reducers from './reducers';
 
+//middleware for axios async requests
+import reduxThunk from 'redux-thunk';
+
 import App from './components/App';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -13,7 +16,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 ReactDOM.render(
     <Provider store={createStore(reducers,
-    composeEnhancers(applyMiddleware())
+    composeEnhancers(applyMiddleware(reduxThunk))
     )}>
         <App />
     </Provider>

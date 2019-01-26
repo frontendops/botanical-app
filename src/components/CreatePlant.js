@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from "redux-form";
 import FileInput from './FileInput';
-
+import { connect } from 'react-redux';
+import {addPlant} from '../actions'
 
 class CreatePlant extends Component {
 
@@ -24,7 +25,7 @@ class CreatePlant extends Component {
     }
 
     submitForm = (formValues) => {
-       console.log(formValues);
+       this.props.addPlant(formValues);
        
     }
 
@@ -72,6 +73,8 @@ class CreatePlant extends Component {
     }
 }
 
-export default reduxForm({
+export default connect(null, {
+    addPlant
+})(reduxForm({
     form: 'createPlant'
-})(CreatePlant);
+})(CreatePlant));

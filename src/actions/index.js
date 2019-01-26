@@ -1,9 +1,22 @@
 import { GET_PLANTS, ADD_PLANT, DELETE_PLANT, EDIT_PLANT } from './types';
-//no axios yet install later
-import axios from 'axios';
+import api from './api/plantsApi';
 
+
+export const addPlant = (formValues) => async dispatch => {
+    api.post('/api/plants/create', formValues)
+    .then(res => dispatch({
+        type: ADD_PLANT,
+        payload: res.data
+    }))
+};
 
 export const getPlants = () => async dispatch => {
-//fill in after backend finished
-}
+    api.get('/api/plants/')
+    .then(res => dispatch({
+        type: GET_PLANTS,
+        payload: res.data
+    }))
+};
+ 
+
 
