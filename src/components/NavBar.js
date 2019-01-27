@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom";
+import Auth from './Auth';
 
 const NavBar = () => {
     return (
@@ -9,7 +10,9 @@ const NavBar = () => {
                 </Link>
             <div className="right menu">
                 <Link to="/">
-                    <div className="item ui olive basic button">Log in</div>
+                    <div className="item ui olive basic button">
+                    <Auth />
+                    </div>
                 </Link>
 
                 <Link to="/create">

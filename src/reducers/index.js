@@ -1,8 +1,25 @@
 import { combineReducers } from 'redux';
-import { GET_PLANTS, ADD_PLANT, DELETE_PLANT, EDIT_PLANT } from '../actions/types';
+import { GET_PLANTS, ADD_PLANT, DELETE_PLANT, EDIT_PLANT, SIGN_IN, SIGN_OUT } from '../actions/types';
 import _ from 'lodash';
 
 import {reducer as formReducer} from 'redux-form';
+
+const initialAuth = {
+  isSignedIn: null
+}
+
+const authReducer = (state = initialAuth, action) => {
+  switch (action.type) {
+    case SIGN_IN:
+      return {...state, isSignedIn: true}
+    
+    case SIGN_OUT:
+      return {...state, isSignedIn: false}
+
+      default:
+        return state;
+  }
+}
 
 
 const plantInfoSignedOut = () => {
@@ -49,5 +66,7 @@ function apiReducer(state = {}, action) {
 export default combineReducers({
     plantInfo: plantInfoSignedOut,
     form: formReducer,
-    apiReducer
+    apiReducer,
+    authReducer
+
 })

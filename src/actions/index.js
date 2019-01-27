@@ -1,6 +1,18 @@
-import { GET_PLANTS, ADD_PLANT, DELETE_PLANT, EDIT_PLANT } from './types';
+import { GET_PLANTS, ADD_PLANT, DELETE_PLANT, EDIT_PLANT, SIGN_IN, SIGN_OUT } from './types';
 import api from './api/plantsApi';
 
+
+export const signIn = () => {
+    return {
+        type: SIGN_IN
+    }
+}
+
+export const signOut = () => {
+    return {
+        type: SIGN_OUT
+    }
+}
 
 export const addPlant = (formValues) => async dispatch => {
     api.post('/api/plants/create', formValues)
