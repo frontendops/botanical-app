@@ -2,9 +2,10 @@ import { GET_PLANTS, ADD_PLANT, DELETE_PLANT, EDIT_PLANT, SIGN_IN, SIGN_OUT } fr
 import api from './api/plantsApi';
 
 
-export const signIn = () => {
+export const signIn = (userId) => {
     return {
-        type: SIGN_IN
+        type: SIGN_IN,
+        payload: userId
     }
 }
 
@@ -14,8 +15,9 @@ export const signOut = () => {
     }
 }
 
-export const addPlant = (formValues) => async dispatch => {
-    api.post('/api/plants/create', formValues)
+export const addPlant = (formValues) => async (dispatch, getState) => {
+    const {userId} = getState().authReducer;
+    api.post('/api/plants/create', {...formValues, userId})
     .then(res => dispatch({
         type: ADD_PLANT,
         payload: res.data

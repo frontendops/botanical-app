@@ -5,16 +5,17 @@ import _ from 'lodash';
 import {reducer as formReducer} from 'redux-form';
 
 const initialAuth = {
-  isSignedIn: null
+  isSignedIn: null,
+  userId: null,
 }
 
 const authReducer = (state = initialAuth, action) => {
   switch (action.type) {
     case SIGN_IN:
-      return {...state, isSignedIn: true}
+      return {...state, isSignedIn: true, userId: action.payload}
     
     case SIGN_OUT:
-      return {...state, isSignedIn: false}
+      return {...state, isSignedIn: false, userId: null}
 
       default:
         return state;
@@ -53,7 +54,7 @@ const plantInfoSignedOut = () => {
 function apiReducer(state = {}, action) {
   switch (action.type) {
     case GET_PLANTS:
-      return {...state, ..._.mapKeys(action.payload, 'name')};
+      return {...state, ..._.mapKeys(action.payload, '_id')};
 
     case ADD_PLANT:
       return {...state, [action.payload.id]: action.payload};

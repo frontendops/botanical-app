@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import PlantCard from './PlantCard';
-import AltPlantCard from './AltPlantCard';
+import DefaultPlants from './DefaultPlants';
+import UserPlants from './UserPlants';
 import './styles/home.css';
 
 import { connect } from 'react-redux';
@@ -14,58 +14,32 @@ class Home extends Component {
     }
 
     changeView = () => {
-        console.log(this.props.plantsSignedIn);
         this.setState({ listView: !this.state.listView});
     }
 
-    renderCards = () => {
-        if (this.state.listView === true) {
+    renderPlants = () => {
+        if (this.props.isSignedIn) {
             return (
-            <div className="ui centered cards">
-                {this.props.plants.map(plant => (
-                    
-                    <PlantCard 
-                    img={plant.img}
-                    name={plant.name}
-                    waterDate={plant.waterDate}
-                    description={plant.description}
-                    />
-                )
-                )}
-            </div>
+                <UserPlants />
             )
         } else {
             return (
-                <div className="ui four doubling cards">
-                {this.props.plants.map(plant => (
-                    
-                    <AltPlantCard 
-                    img={plant.img}
-                    name={plant.name}
-                    waterDate={plant.waterDate}
-                    />
-                )
-                )}
-            </div>
+                <DefaultPlants listView={this.state.listView}/>
             )
         }
     }
 
-    componentDidMount () {
-        this.props.getPlants();
-    }
-    
 
     render () {
-        
+        //change icon class depending on listView
         return (
             <div className="ui container">
-        <div class="ui clearing segment">
-        <div onClick={this.changeView} class="list-view">
-        <i class="th large icon"></i>
+        <div className="ui clearing segment">
+        <div onClick={this.changeView} className="list-view">
+        <i className="th large icon"></i>
         </div>
         </div>
-            {this.renderCards()}
+            {this.renderPlants()}
             </div>
         )
     }
@@ -73,7 +47,7 @@ class Home extends Component {
 
 function mapStateToProps(state) {
     return {
-        plants: state.plantInfo,
+        isSignedIn: state.authReducer.isSignedIn
     };
 }
 export default connect(mapStateToProps, {

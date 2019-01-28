@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { signIn, signOut} from '../actions';
+import { signIn, signOut, getPlants} from '../actions';
 
 class Auth extends Component {
     componentDidMount () {
@@ -10,7 +10,6 @@ class Auth extends Component {
                 scope: 'email'
             }).then(() => {
                 this.auth = window.gapi.auth2.getAuthInstance();
-
                 this.onAuthChange(this.auth.isSignedIn.get());
                 this.auth.isSignedIn.listen(this.onAuthChange);
             });
@@ -19,7 +18,7 @@ class Auth extends Component {
 
     onAuthChange = isSignedIn => {
         if (isSignedIn) {
-          this.props.signIn();
+          this.props.signIn(this.auth.currentUser.get().getId());
         } else {
           this.props.signOut();
         }
@@ -27,12 +26,15 @@ class Auth extends Component {
 
       onSignInClick = () => {
         this.auth.signIn();
+        this.props.getPlants();
+
       };
     
       onSignOutClick = () => {
         this.auth.signOut();
       };
 
+      //change login button text and functionality when clicked
     renderAuthButton = () => {
         let {isSignedIn} = this.props;
         if (isSignedIn === null) {
@@ -60,5 +62,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-    signIn, signOut
+    signIn, signOut, getPlants
 })(Auth);
