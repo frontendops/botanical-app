@@ -9,20 +9,25 @@ class UserPlants extends Component {
     componentDidMount () {
         console.log(this.props.userPlantData)
     }
-    
+    renderUserPlants = () => {
+        const currentUserId = this.props.currentUserData.userId
+        return (
+            this.props.userPlantData.filter(user => user.userId === currentUserId).map(plant => (
+                <PlantCard key={plant.name}
+                img={plant.img}
+                name={plant.name}
+                waterDate={plant.waterDate}
+                description={plant.description}
+                />
+            )
+            )
+        )
+    }
+
     render () {
         return (
             <div className="ui centered cards">
-               {this.props.userPlantData.map(plant => (
-                    
-                    <PlantCard key={plant.name}
-                    img={plant.img}
-                    name={plant.name}
-                    waterDate={plant.waterDate}
-                    description={plant.description}
-                    />
-                )
-                )}
+               {this.renderUserPlants()}
                 
             </div>
         )
@@ -32,7 +37,8 @@ class UserPlants extends Component {
 //ojects get turned into an array to let us map through all of our items
 function mapStateToProps(state) {
     return {
-        userPlantData: Object.values(state.apiReducer)
+        userPlantData: Object.values(state.apiReducer),
+        currentUserData: state.authReducer
     }
 }
 
