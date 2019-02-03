@@ -54,7 +54,7 @@ const plantInfoSignedOut = () => {
 function apiReducer(state = {}, action) {
   switch (action.type) {
     case GET_PLANTS:
-      return {...state, ..._.mapKeys(action.payload, '_id')};
+      return {...state, ..._.mapKeys(action.payload, 'name')};
 
     case ADD_PLANT:
       return {...state, [action.payload.id]: action.payload};

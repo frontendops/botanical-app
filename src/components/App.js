@@ -6,6 +6,7 @@ import Home from './Home';
 import CreatePlant from './CreatePlant';
 import PlantView from "./PlantView";
 import PlantNotes from "./PlantNotes";
+import EditPlant from './EditPlant';
 
 class App extends React.Component {
     
@@ -22,6 +23,7 @@ class App extends React.Component {
                     <Route path="/create" exact component={CreatePlant} />
                     <Route path="/view" exact component={PlantView} />
                     <Route path="/notes" exact component={PlantNotes} />
+                    <Route path="/edit/:name" exact component={EditPlant} />
 
                 </div>
                 </BrowserRouter>

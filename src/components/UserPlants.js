@@ -12,12 +12,13 @@ class UserPlants extends Component {
     renderUserPlants = () => {
         const currentUserId = this.props.currentUserData.userId
         return (
-            this.props.userPlantData.filter(user => user.userId === currentUserId).map(plant => (
+            this.props.userPlantData.filter(user => user.userId === currentUserId).map((plant, id) => (
                 <PlantCard key={plant.name}
                 img={plant.img}
                 name={plant.name}
                 waterDate={plant.waterDate}
                 description={plant.description}
+                id={id}
                 />
             )
             )

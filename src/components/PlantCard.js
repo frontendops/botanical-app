@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-const PlantCard = ({img, name, description, waterDate}) => {
+const PlantCard = ({img, name, description, waterDate, id}) => {
         return (
             <div className="ui card">
                 
@@ -21,7 +21,7 @@ const PlantCard = ({img, name, description, waterDate}) => {
                 </div>
                 <div className="extra content">
                     <span className="right floated">
-                    <Link to="/create">
+                    <Link to={`/edit/${name}`}>
                     <i className="edit icon"></i>
                     </Link>
                     </span>
