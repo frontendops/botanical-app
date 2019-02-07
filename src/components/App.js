@@ -23,7 +23,7 @@ class App extends React.Component {
                     <Route path="/create" exact component={CreatePlant} />
                     <Route path="/view" exact component={PlantView} />
                     <Route path="/notes" exact component={PlantNotes} />
-                    <Route path="/edit/:name" exact component={EditPlant} />
+                    <Route path="/edit/:id" exact component={EditPlant} />
 
                 </div>
                 </BrowserRouter>

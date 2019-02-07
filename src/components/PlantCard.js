@@ -21,7 +21,7 @@ const PlantCard = ({img, name, description, waterDate, id}) => {
                 </div>
                 <div className="extra content">
                     <span className="right floated">
-                    <Link to={`/edit/${name}`}>
+                    <Link to={`/edit/${id}`}>
                     <i className="edit icon"></i>
                     </Link>
                     </span>

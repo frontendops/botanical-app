@@ -33,4 +33,8 @@ export const getPlants = () => async dispatch => {
 };
  
 
+export const editPlant = () => {
+    
+}
+
 

@@ -7,18 +7,18 @@ import { connect } from 'react-redux';
 
 class UserPlants extends Component {
     componentDidMount () {
-        console.log(this.props.userPlantData)
+       
     }
     renderUserPlants = () => {
         const currentUserId = this.props.currentUserData.userId
         return (
-            this.props.userPlantData.filter(user => user.userId === currentUserId).map((plant, id) => (
+            this.props.userPlantData.filter(user => user.userId === currentUserId).map((plant) => (
                 <PlantCard key={plant.name}
                 img={plant.img}
                 name={plant.name}
                 waterDate={plant.waterDate}
                 description={plant.description}
-                id={id}
+                id={plant._id}
                 />
             )
             )
