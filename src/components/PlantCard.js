@@ -5,7 +5,7 @@ const PlantCard = ({img, name, description, waterDate, id}) => {
         return (
             <div className="ui card">
                 
-                <Link to="/view" className="image">
+                <Link to={`/view/${id}`} className="image">
                     <img src={img} alt="plant name"/>
                 </Link>
                 

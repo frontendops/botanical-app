@@ -1,21 +1,27 @@
-import React from 'react'
+import React, {Component} from 'react'
 
-const PlantView = () => {
+import { connect } from 'react-redux'
+
+class PlantView extends Component  {
+  
+  
+  render(){
+    //make this component call its own data on reload to bookmark
+    const {plant} = this.props;
     return (
+
         <div class="ui raised very padded text container segment">
             <div class="ui fluid card">
       <div class="image">
         <img src="https://farm5.staticflickr.com/4863/45878440395_b6fb181478_z_d.jpg" alt="my plant"/>
       </div>
       <div class="content">
-      <div class="header">Matt Giampietro</div>
-      <div class="description">
-        Friends
-      </div>
+      <div class="header">{plant.name}</div>
+     
 
       <div className="header">Plant Info</div>
       <div class="description">
-        Matthew is an interior designer living in New York.
+        {plant.description}
       </div>
     </div>
     
@@ -27,9 +33,7 @@ const PlantView = () => {
     </div>
     <div class="extra content">
     <div class="description">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut placet, inquit, etsi enim illud erat aptius, aequum cuique concedere. Et quod est munus, quod opus sapientiae? Qui autem esse poteris, nisi te amor ipse ceperit? Hoc etsi multimodis reprehendi potest, tamen accipio, quod dant. Nec enim, omnes avaritias si aeque avaritias esse dixerimus, sequetur ut etiam aequas esse dicamus.
-
-
+      {plant.notes}
       </div>
     </div>
     </div>     
@@ -37,6 +41,14 @@ const PlantView = () => {
   
       
     )
+  }
 }
 
-export default PlantView;
+function mapStateToProps(state, ownProps) {
+  return {
+    plant: state.apiReducer[ownProps.match.params.id]
+  }
+
+}
+
+export default connect(mapStateToProps)(PlantView);

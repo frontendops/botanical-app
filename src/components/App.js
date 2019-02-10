@@ -21,7 +21,7 @@ class App extends React.Component {
                     <NavBar />
                     <Route path="/" exact component={Home} />
                     <Route path="/create" exact component={CreatePlant} />
-                    <Route path="/view" exact component={PlantView} />
+                    <Route path="/view/:id" exact component={PlantView} />
                     <Route path="/notes" exact component={PlantNotes} />
                     <Route path="/edit/:id" exact component={EditPlant} />
 
