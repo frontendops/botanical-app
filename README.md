@@ -15,3 +15,8 @@ then run `npm start`
   - Making requests to my backend API
 - lodash
   - Extra functionality for my reducers
+
+## What i learned
+- Restful conventions with react/redux
+- User login with google
+- Storing data with mongoDb
