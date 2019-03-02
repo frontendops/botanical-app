@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from "redux-form";
-import { FileInput } from './FileInput';
 import { connect } from 'react-redux';
-import { addPlant } from '../actions'
+import { addPlant } from '../actions';
+import ImageUpload from './imageUpload.js';
+
+const adaptFileEventToValue = delegate => e => delegate(e.target.files[0]);
 
 class CreatePlant extends Component {
+
+    state = {
+        selectedImage: null
+    }
 
     renderInput = (formProps) => {
         return (
@@ -24,13 +30,42 @@ class CreatePlant extends Component {
         )
     }
 
+    getImageData = (data) => {
+        this.setState({ imageInfo: data });
 
-    UploadFile = ({ input: { value: omitValue, ...formProps }, meta: omitMeta, ...props }) => (
-        <input type='file' {...formProps} {...props} />
+        console.log(data)
+    }
+
+    //uploadFile = ({ input: { value: omitValue, ...formProps }, meta: omitMeta, ...props }) => (
+    //   <input type='file' {...formProps} {...props} />
+    //);
+
+    UploadFile = ({ input: { value: omitValue, ...inputProps }, meta: omitMeta, ...props }) => (
+        <input type='file' {...inputProps} {...props} />
     );
 
+
+
+    FileInput = ({
+        input: { value: omitValue, onChange, onBlur, ...inputProps },
+        meta: omitMeta,
+        ...props
+    }) => {
+        return (
+            <input
+                onChange={adaptFileEventToValue(onChange)}
+                onBlur={adaptFileEventToValue(onBlur)}
+                type="file"
+                {...props.input}
+                {...props}
+            />
+        );
+    };
+
+
     submitForm = (formValues) => {
-        this.props.addPlant(formValues);
+        this.props.addPlant(formValues, this.state.imageInfo.name);
+        console.log(this.state.imageInfo);
 
     }
 
@@ -57,9 +92,10 @@ class CreatePlant extends Component {
 
                     </div>
 
+
                     <div className="field">
                         <label>Select image</label>
-                        <Field name="image" type="file" accept=".png" component={this.UploadFile} />
+                        <ImageUpload getImageData={this.getImageData} />
                     </div>
 
                     <div className="field">
