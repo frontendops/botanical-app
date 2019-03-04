@@ -6,30 +6,30 @@ import { connect } from 'react-redux';
 
 
 class UserPlants extends Component {
-    componentDidMount () {
-       
+    componentDidMount() {
+
     }
     renderUserPlants = () => {
         const currentUserId = this.props.currentUserData.userId
         return (
             this.props.userPlantData.filter(user => user.userId === currentUserId).map((plant) => (
                 <PlantCard key={plant.name}
-                img={plant.img}
-                name={plant.name}
-                waterDate={plant.waterDate}
-                description={plant.description}
-                id={plant._id}
+                    img={plant.image}
+                    name={plant.name}
+                    waterDate={plant.waterDate}
+                    description={plant.description}
+                    id={plant._id}
                 />
             )
             )
         )
     }
 
-    render () {
+    render() {
         return (
             <div className="ui centered cards">
-               {this.renderUserPlants()}
-                
+                {this.renderUserPlants()}
+
             </div>
         )
     }

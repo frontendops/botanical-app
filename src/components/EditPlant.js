@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from "redux-form";
-import { FileInput } from './FileInput';
 import { connect } from 'react-redux';
 import { editPlant } from '../actions'
 
@@ -66,7 +65,7 @@ class EditPlant extends Component {
 
                         <div className="field">
                             <label>Select image</label>
-                            <Field name="image" type="file" component={FileInput} />
+                            <Field name="image" type="file" component={this.renderInput} />
                         </div>
 
                         <div className="field">

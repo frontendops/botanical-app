@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
-import { Field, reduxForm } from "redux-form";
+import axios from 'axios';
+import ImageList from './imageList';
+import { Field, reduxForm, change } from "redux-form";
 import { connect } from 'react-redux';
 import { addPlant } from '../actions';
-import ImageUpload from './imageUpload.js';
 
-const adaptFileEventToValue = delegate => e => delegate(e.target.files[0]);
 
 class CreatePlant extends Component {
 
     state = {
+        searchedImage: '',
+        imageList: [],
         selectedImage: null
     }
+
 
     renderInput = (formProps) => {
         return (
@@ -30,51 +33,40 @@ class CreatePlant extends Component {
         )
     }
 
-    getImageData = (data) => {
-        this.setState({ imageInfo: data });
+    //send axios request to fetch for searched images here
+    onImageSubmit = () => {
 
-        console.log(data)
+        const image = this.state.searchedImage;
+        axios.get('https://api.unsplash.com/search/photos', {
+            params: { query: image },
+            headers: {
+                Authorization: 'Client-ID c85af5822bfc242f5f7f8c34f93eb58f86961cf3c6983b97d24fc2e417f05d5b'
+            }
+        }).then(res => {
+            this.setState({ imageList: res.data.results })
+            console.log(res.data.results);
+
+        })
     }
 
-    //uploadFile = ({ input: { value: omitValue, ...formProps }, meta: omitMeta, ...props }) => (
-    //   <input type='file' {...formProps} {...props} />
-    //);
+    onSelectedImage = (data) => {
+        this.setState({ selectedImage: data });
+        this.props.dispatch(change('createPlant', 'image', this.state.selectedImage));
+    }
 
-    UploadFile = ({ input: { value: omitValue, ...inputProps }, meta: omitMeta, ...props }) => (
-        <input type='file' {...inputProps} {...props} />
-    );
-
-
-
-    FileInput = ({
-        input: { value: omitValue, onChange, onBlur, ...inputProps },
-        meta: omitMeta,
-        ...props
-    }) => {
-        return (
-            <input
-                onChange={adaptFileEventToValue(onChange)}
-                onBlur={adaptFileEventToValue(onBlur)}
-                type="file"
-                {...props.input}
-                {...props}
-            />
-        );
-    };
+    //when rendering list. need to seperate to another component
 
 
     submitForm = (formValues) => {
-        this.props.addPlant(formValues, this.state.imageInfo.name);
-        console.log(this.state.imageInfo);
+        this.props.addPlant(formValues);
 
     }
 
     render() {
         return (
             <div className="ui container">
-                <form onSubmit={this.props.handleSubmit(this.submitForm)}
+                <form onSubmit={e => e.preventDefault()}
                     className="ui form"
-                    encType="multipart/form-data"
                 >
                     <div className="field">
                         <label>Plant name</label>
@@ -94,8 +86,24 @@ class CreatePlant extends Component {
 
 
                     <div className="field">
-                        <label>Select image</label>
-                        <ImageUpload getImageData={this.getImageData} />
+                        <div className="ui action input">
+                            <input onChange={e => this.setState({ searchedImage: e.target.value })} />
+                            <button
+                                onClick={this.onImageSubmit}
+                                className="ui olive button">Search Image</button>
+                        </div>
+
+                        <ImageList
+                            images={this.state.imageList}
+                            onSelectedImage={this.onSelectedImage}
+                        />
+
+
+                        <div className="ui transparent input">
+                            <Field name="image" component={this.renderInput} />
+                        </div>
+
+
                     </div>
 
                     <div className="field">
@@ -109,14 +117,16 @@ class CreatePlant extends Component {
 
                     </div>
 
-                    <button className="ui olive button" type="submit">Save plant</button>
                 </form>
+
+                <button className="ui olive button" onClick={this.props.handleSubmit(this.submitForm)}>Save plant</button>
             </div>
         )
     }
 }
 
 export default connect(null, {
+
     addPlant
 })(reduxForm({
     form: 'createPlant'
