@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { GET_PLANTS, ADD_PLANT, DELETE_PLANT, EDIT_PLANT, SIGN_IN, SIGN_OUT } from '../actions/types';
+import { GET_PLANTS, ADD_PLANT, DELETE_PLANT, EDIT_PLANT, SIGN_IN, SIGN_OUT, GET_PLANT } from '../actions/types';
 import _ from 'lodash';
 
-import {reducer as formReducer} from 'redux-form';
+import { reducer as formReducer } from 'redux-form';
 
 const initialAuth = {
   isSignedIn: null,
@@ -12,40 +12,44 @@ const initialAuth = {
 const authReducer = (state = initialAuth, action) => {
   switch (action.type) {
     case SIGN_IN:
-      return {...state, isSignedIn: true, userId: action.payload}
-    
-    case SIGN_OUT:
-      return {...state, isSignedIn: false, userId: null}
+      return { ...state, isSignedIn: true, userId: action.payload }
 
-      default:
-        return state;
+    case SIGN_OUT:
+      return { ...state, isSignedIn: false, userId: null }
+
+    default:
+      return state;
   }
 }
 
 
 const plantInfoSignedOut = () => {
-    return [
-        { img: 'https://farm5.staticflickr.com/4863/45878440395_b6fb181478_z_d.jpg',
-          name: 'Lilly',
-          waterDate: 5,
-          description: 'This species is from the plant kingdom'
-        },
-        { img: 'https://farm5.staticflickr.com/4833/32917918788_b68b3d13b9_z_d.jpg',
-          name: 'Petals',
-          waterDate: 3,
-          description: 'This species is from the plant kingdom'
-        },
-        { img: 'https://farm5.staticflickr.com/4842/32917914028_9a0ed12924_z_d.jpg',
-          name: 'Daisy',
-          waterDate: 7,
-          description: 'This species is from the plant kingdom'
-        },
-        { img: 'https://farm8.staticflickr.com/7906/46740615132_7ba81221d0_z_d.jpg',
-          name: 'Succulent',
-          waterDate: 15,
-          description: 'This species is from the plant kingdom'
-        },
-    ]
+  return [
+    {
+      img: 'https://farm5.staticflickr.com/4863/45878440395_b6fb181478_z_d.jpg',
+      name: 'Lilly',
+      waterDate: 5,
+      description: 'This species is from the plant kingdom'
+    },
+    {
+      img: 'https://farm5.staticflickr.com/4833/32917918788_b68b3d13b9_z_d.jpg',
+      name: 'Petals',
+      waterDate: 3,
+      description: 'This species is from the plant kingdom'
+    },
+    {
+      img: 'https://farm5.staticflickr.com/4842/32917914028_9a0ed12924_z_d.jpg',
+      name: 'Daisy',
+      waterDate: 7,
+      description: 'This species is from the plant kingdom'
+    },
+    {
+      img: 'https://farm8.staticflickr.com/7906/46740615132_7ba81221d0_z_d.jpg',
+      name: 'Succulent',
+      waterDate: 15,
+      description: 'This species is from the plant kingdom'
+    },
+  ]
 }
 
 
@@ -54,10 +58,13 @@ const plantInfoSignedOut = () => {
 function apiReducer(state = {}, action) {
   switch (action.type) {
     case GET_PLANTS:
-      return {...state, ..._.mapKeys(action.payload, '_id')};
+      return { ...state, ..._.mapKeys(action.payload, '_id') };
 
     case ADD_PLANT:
-      return {...state, [action.payload.id]: action.payload};
+      return { ...state, [action.payload.id]: action.payload };
+
+    case GET_PLANT:
+      return { ...state, [action.payload.id]: action.payload }
 
     default:
       return state;
@@ -65,9 +72,9 @@ function apiReducer(state = {}, action) {
 }
 
 export default combineReducers({
-    plantInfo: plantInfoSignedOut,
-    form: formReducer,
-    apiReducer,
-    authReducer
+  plantInfo: plantInfoSignedOut,
+  form: formReducer,
+  apiReducer,
+  authReducer
 
 })

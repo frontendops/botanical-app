@@ -7,8 +7,9 @@ import { connect } from 'react-redux';
 
 class UserPlants extends Component {
     componentDidMount() {
-
+        this.props.getPlants()
     }
+
     renderUserPlants = () => {
         const currentUserId = this.props.currentUserData.userId
         return (
