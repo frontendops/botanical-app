@@ -1,5 +1,6 @@
 import { GET_PLANTS, ADD_PLANT, DELETE_PLANT, EDIT_PLANT, SIGN_IN, SIGN_OUT, GET_PLANT } from './types';
 import api from './api/plantsApi';
+import history from '../history';
 
 
 export const signIn = (userId) => {
@@ -23,6 +24,8 @@ export const addPlant = (formValues) => async (dispatch, getState) => {
             type: ADD_PLANT,
             payload: res.data
         }))
+
+    history.push('/');
 };
 
 //get all plants from our db
@@ -45,7 +48,10 @@ export const getPlant = (id) => async dispatch => {
 export const editPlant = (id, formValues) => async dispatch => {
     const response = await api.put(`/api/plants/${id}`, formValues)
 
-    dispatch({ type: EDIT_PLANT, payload: response.data })
+    dispatch({ type: EDIT_PLANT, payload: response.data });
+
+    history.push('/');
+
 }
 
 
