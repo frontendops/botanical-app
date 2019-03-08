@@ -38,6 +38,8 @@ class EditPlant extends Component {
         )
     }
 
+
+
     onImageSubmit = () => {
 
         const image = this.state.searchedImage;
@@ -64,6 +66,7 @@ class EditPlant extends Component {
     }
 
     render() {
+
         return (
             <div className="ui container">
                 Edit plant

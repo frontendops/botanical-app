@@ -13,7 +13,7 @@ const PlantCard = ({ img, name, description, waterDate, id }) => {
             <div className="content">
                 <div className="header">{name}</div>
                 <div className="meta">
-                    <span className="date">{`Water in ${waterDate} days`}</span>
+                    <span className="date">Water on <b>{`${waterDate}`}</b></span>
                 </div>
                 <div className="description">
                     {description}
