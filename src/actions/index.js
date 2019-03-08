@@ -56,7 +56,7 @@ export const editPlant = (id, formValues) => async dispatch => {
 
 // delete teh selected plant
 export const deletePlant = (id) => async dispatch => {
-    const response = await api.delete(`/api/delete/${id}`)
+    const response = await api.delete(`/api/plants/${id}`)
 
     dispatch({ type: DELETE_PLANT, payload: id })
 
