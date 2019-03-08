@@ -3,13 +3,11 @@ import ReactDOM from 'react-dom';
 import history from '../history';
 import { connect } from 'react-redux';
 import { deletePlant } from '../actions';
-import Modal from './Modal';
 
 class DeletePlant extends Component {
 
     onDeletePlant = () => {
         this.props.deletePlant(this.props.match.params.id);
-        console.log("delete plant?")
     }
     render() {
         return ReactDOM.createPortal(
