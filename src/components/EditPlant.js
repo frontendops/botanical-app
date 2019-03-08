@@ -136,7 +136,8 @@ function mapStateToProps(state, ownProps) {
         currentUserData: state.authReducer,
         initialValues: {
             name: plant.name,
-            description: plant.description
+            description: plant.description,
+            notes: plant.notes
         }
     }
 }

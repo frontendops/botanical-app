@@ -44,7 +44,7 @@ export const getPlant = (id) => async dispatch => {
     dispatch({ type: GET_PLANT, payload: response.data })
 }
 
-
+//put and edit the plant info
 export const editPlant = (id, formValues) => async dispatch => {
     const response = await api.put(`/api/plants/${id}`, formValues)
 
@@ -54,4 +54,11 @@ export const editPlant = (id, formValues) => async dispatch => {
 
 }
 
+// delete teh selected plant
+export const deletePlant = (id) => async dispatch => {
+    const response = await api.delete(`/api/delete/${id}`)
 
+    dispatch({ type: DELETE_PLANT, payload: id })
+
+    history.push('/')
+}

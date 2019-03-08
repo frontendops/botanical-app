@@ -64,7 +64,10 @@ function apiReducer(state = {}, action) {
       return { ...state, [action.payload.id]: action.payload };
 
     case GET_PLANT:
-      return { ...state, [action.payload.id]: action.payload }
+      return { ...state, [action.payload.id]: action.payload };
+
+    case DELETE_PLANT:
+      return _.omit(state, action.payload);
 
     default:
       return state;

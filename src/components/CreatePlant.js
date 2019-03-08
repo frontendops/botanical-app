@@ -44,7 +44,6 @@ class CreatePlant extends Component {
             }
         }).then(res => {
             this.setState({ imageList: res.data.results })
-            console.log(res.data.results);
 
         })
     }

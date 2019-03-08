@@ -17,7 +17,7 @@ class UserPlants extends Component {
                 <PlantCard key={plant.name}
                     img={plant.image}
                     name={plant.name}
-                    waterDate={plant.waterDate}
+                    waterDate={plant.date}
                     description={plant.description}
                     id={plant._id}
                 />
