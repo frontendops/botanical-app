@@ -9,7 +9,11 @@ class DeletePlant extends Component {
     onDeletePlant = () => {
         this.props.deletePlant(this.props.match.params.id);
     }
+
+
+
     render() {
+
         return (
             <div>
                 <Modal

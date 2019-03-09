@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { signIn, signOut, getPlants} from '../actions';
+import { signIn, signOut, getPlants } from '../actions';
 
 class Auth extends Component {
-    componentDidMount () {
+    componentDidMount() {
         window.gapi.load('client:auth2', () => {
             window.gapi.client.init({
                 clientId: '301625942479-036cu7tulv8jc3527vi2puq3igiq5h6h.apps.googleusercontent.com',
@@ -18,25 +18,25 @@ class Auth extends Component {
 
     onAuthChange = isSignedIn => {
         if (isSignedIn) {
-          this.props.signIn(this.auth.currentUser.get().getId());
+            this.props.signIn(this.auth.currentUser.get().getId());
         } else {
-          this.props.signOut();
+            this.props.signOut();
         }
-      };
+    };
 
-      onSignInClick = () => {
+    onSignInClick = () => {
         this.auth.signIn();
         this.props.getPlants();
 
-      };
-    
-      onSignOutClick = () => {
-        this.auth.signOut();
-      };
+    };
 
-      //change login button text and functionality when clicked
+    onSignOutClick = () => {
+        this.auth.signOut();
+    };
+
+    //change login button text and functionality when clicked
     renderAuthButton = () => {
-        let {isSignedIn} = this.props;
+        let { isSignedIn } = this.props;
         if (isSignedIn === null) {
             console.log('nothing');
         } else if (isSignedIn === true) {
@@ -45,20 +45,20 @@ class Auth extends Component {
             );
         } else {
             return (
-                <div onClick={this.onSignInClick}>Log In</div>
+                <div className="ui olive basic button" onClick={this.onSignInClick}>Log In</div>
             );
         };
     }
-    
-    render () {
+
+    render() {
         return <React.Fragment>
-          {this.renderAuthButton()}
+            {this.renderAuthButton()}
         </React.Fragment>
     }
 }
 
 function mapStateToProps(state) {
-    return { isSignedIn: state.authReducer.isSignedIn}
+    return { isSignedIn: state.authReducer.isSignedIn }
 }
 
 export default connect(mapStateToProps, {

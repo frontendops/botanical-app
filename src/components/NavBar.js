@@ -8,11 +8,11 @@ import { connect } from 'react-redux';
 class NavBar extends Component {
 
     renderNewPlantBtn = () => {
-        const {isSignedIn} = this.props.auth
+        const { isSignedIn } = this.props.auth
         if (isSignedIn) {
             return (
                 <Link to="/create">
-                     <div className="item ui grey basic button">New Plant</div>
+                    <div className="ui grey basic button">New Plant</div>
                 </Link>
             )
         }
@@ -21,20 +21,20 @@ class NavBar extends Component {
 
         return (
             <div className="ui menu">
-                    <Link to="/">
-                        <div className="item">Plantly</div>
-                    </Link>
+                <Link to="/">
+                    <div className="item">Plantly</div>
+                </Link>
                 <div className="right menu">
                     <Link to="/">
-                        <div className="item ui olive basic button">
+
                         <Auth />
-                        </div>
+
                     </Link>
-    
+
                     {this.renderNewPlantBtn()}
-                    
+
                 </div>
-                
+
             </div>
         )
     }

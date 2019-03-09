@@ -24,8 +24,14 @@ class UserPlants extends Component {
         }
 
         let format = month + '-' + dt + '-' + year;
-
         return format;
+    }
+
+    timeDifference = (isoDate) => {
+        let dbDate = new Date(isoDate);
+        let currentDate = new Date()
+
+        return `today is ${currentDate} and the next plant date is ${dbDate}`;
     }
 
     renderUserPlants = () => {
