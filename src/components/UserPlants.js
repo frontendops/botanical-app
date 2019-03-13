@@ -1,64 +1,91 @@
 import React, { Component } from 'react'
 import PlantCard from './PlantCard';
+import Notifications from './Notifications';
 
-import { getPlants } from '../actions';
+import { getPlants, } from '../actions';
 import { connect } from 'react-redux';
 
 
 class UserPlants extends Component {
+
+    state = {
+        days: []
+    }
+
     componentDidMount() {
         this.props.getPlants()
     }
 
-    timeConverter = (isoDate) => {
-        let d = new Date(isoDate)
-        let year = d.getFullYear();
-        let month = d.getMonth() + 1;
-        let dt = d.getDate();
-
-        if (dt < 10) {
-            dt = '0' + dt;
-        }
-        if (month < 10) {
-            month = '0' + month;
-        }
-
-        let format = month + '-' + dt + '-' + year;
-        return format;
-    }
-
-    timeDifference = (isoDate) => {
-        let dbDate = new Date(isoDate);
-        let currentDate = new Date()
-
-        return `today is ${currentDate} and the next plant date is ${dbDate}`;
-    }
 
     renderUserPlants = () => {
-        const currentUserId = this.props.currentUserData.userId
+        const currentUserId = this.props.currentUserData.userId;
 
         return (
-            this.props.userPlantData.filter(user => user.userId === currentUserId).map((plant) => (
+            this.props.userPlantData.filter(user => user.userId === currentUserId).sort((a, b) => {
+                return this.timeDifference(a.date) - this.timeDifference(b.date)
+            }).map((plant) => (
                 <PlantCard key={plant.name}
                     img={plant.image}
                     name={plant.name}
-                    waterDate={this.timeConverter(plant.date)}
+                    waterDate={this.timeDifference(plant.date)}
                     description={plant.description}
                     id={plant._id}
+                    getData={this.getData}
                 />
             )
             )
         )
     }
 
+    //gets how many days until next day to water plant
+    timeDifference = (isoDate) => {
+
+        const oneDay = 24 * 60 * 60 * 1000;
+        let dbDate = new Date(isoDate);
+        let currentDate = new Date()
+
+        let dayDiff = Math.round(Math.abs((currentDate.getTime() - dbDate.getTime()) / (oneDay)));
+
+        // this.props.(dayDiff);
+
+        return dayDiff;
+    }
+
+    getData = (data) => {
+        this.setState(prevState => ({
+            days: [...prevState.days, {
+                days: data.date,
+                id: data.id,
+                name: data.name
+            }],
+        }))
+    }
+
+
     render() {
+        if (this.props.listView === true) {
+            return (
+                <div>
+                    <Notifications dates={this.state.days} />
+                    <div className="ui centered cards">
+                        {this.renderUserPlants()}
 
-        return (
-            <div className="ui centered cards">
-                {this.renderUserPlants()}
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <Notifications dates={this.state.days} />
+                    <div className="ui four doubling cards">
+                        {this.renderUserPlants()}
 
-            </div>
-        )
+                    </div>
+                </div>
+            )
+        }
+
+
     }
 }
 

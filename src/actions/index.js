@@ -1,4 +1,4 @@
-import { GET_PLANTS, ADD_PLANT, DELETE_PLANT, EDIT_PLANT, SIGN_IN, SIGN_OUT, GET_PLANT } from './types';
+import { GET_PLANTS, ADD_PLANT, DELETE_PLANT, EDIT_PLANT, SIGN_IN, SIGN_OUT, GET_PLANT, GET_AMOUNT } from './types';
 import api from './api/plantsApi';
 import history from '../history';
 
@@ -16,6 +16,14 @@ export const signOut = () => {
     }
 }
 
+// export const getDays = (days) => {
+//     return {
+//         type: GET_DAYS,
+//         payload: days
+//     }
+
+// }
+
 //post request to add plant to our database
 export const addPlant = (formValues) => async (dispatch, getState) => {
     const { userId } = getState().authReducer;
@@ -28,8 +36,11 @@ export const addPlant = (formValues) => async (dispatch, getState) => {
     history.push('/');
 };
 
+
+
 //get all plants from our db
 export const getPlants = () => async dispatch => {
+
     api.get('/api/plants/')
         .then(res => dispatch({
             type: GET_PLANTS,
@@ -61,4 +72,12 @@ export const deletePlant = (id) => async dispatch => {
     dispatch({ type: DELETE_PLANT, payload: id })
 
     history.push('/')
+}
+
+
+export const getAmount = (amount) => {
+    return {
+        type: GET_AMOUNT,
+        payload: amount
+    }
 }

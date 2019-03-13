@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import { GET_PLANTS, ADD_PLANT, DELETE_PLANT, EDIT_PLANT, SIGN_IN, SIGN_OUT, GET_PLANT } from '../actions/types';
+import { GET_PLANTS, ADD_PLANT, DELETE_PLANT, EDIT_PLANT, SIGN_IN, SIGN_OUT, GET_PLANT, GET_AMOUNT } from '../actions/types';
 import _ from 'lodash';
 
 import { reducer as formReducer } from 'redux-form';
 
 const initialAuth = {
   isSignedIn: null,
-  userId: null,
+  userId: null
 }
 
 const authReducer = (state = initialAuth, action) => {
@@ -55,7 +55,13 @@ const plantInfoSignedOut = () => {
 
 
 //add all actions after backend
+// const initialPlantState = {
+//   days: 5
+// }
+
+
 function apiReducer(state = {}, action) {
+
   switch (action.type) {
     case GET_PLANTS:
       return { ...state, ..._.mapKeys(action.payload, '_id') };
@@ -74,10 +80,40 @@ function apiReducer(state = {}, action) {
   }
 }
 
+
+// const initialdays = {
+//   days: []
+// }
+
+
+// //add a new pair EACH TIME
+// function daysReducer(state = initialdays, action) {
+//   switch (action.type) {
+//     case GET_DAYS:
+//       return { ...state, days: state.days.concat({ days: action.payload.date, id: action.payload.id }) };
+
+//     default:
+//       return state;
+//   }
+// }
+
+const importantPlants = {
+  amount: 0
+}
+function amountReducer(state = importantPlants, action) {
+  switch (action.type) {
+    case GET_AMOUNT:
+      return { ...state, amount: action.payload }
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   plantInfo: plantInfoSignedOut,
   form: formReducer,
   apiReducer,
-  authReducer
+  authReducer,
+  amountReducer
 
 })

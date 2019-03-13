@@ -67,19 +67,9 @@ class EditPlant extends Component {
     }
 
     //gets number of days left untill its time to water the plant
-    timeDifference = (isoDate) => {
 
-        const oneDay = 24 * 60 * 60 * 1000;
-        let dbDate = new Date(isoDate);
-        let currentDate = new Date()
-
-        let dayDiff = Math.round(Math.abs((currentDate.getTime() - dbDate.getTime()) / (oneDay)));
-
-        return dayDiff
-    }
 
     render() {
-        console.log(this.timeDifference(this.props.plant.date))
 
         return (
             <div className="ui container">
