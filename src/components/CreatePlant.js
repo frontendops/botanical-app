@@ -11,15 +11,27 @@ class CreatePlant extends Component {
     state = {
         searchedImage: '',
         imageList: [],
-        selectedImage: null
+        selectedImage: ""
     }
 
+    renderError = ({ error, touched }) => {
+        if (touched && error) {
+            return (
+                <div className="ui error message">
+                    <div className="header">{error}</div>
+                </div>
+            );
+        }
+    }
 
     renderInput = (formProps) => {
         return (
-            <input placeholder={formProps.placeholder}
-                type={formProps.type}
-                {...formProps.input} />
+            <React.Fragment>
+                {this.renderError(formProps.meta)}
+                <input placeholder={formProps.placeholder}
+                    type={formProps.type}
+                    {...formProps.input} />
+            </React.Fragment>
         )
     }
 
@@ -53,6 +65,21 @@ class CreatePlant extends Component {
         this.props.dispatch(change('createPlant', 'image', this.state.selectedImage));
     }
 
+    renderImageChosen = () => {
+        if (this.state.selectedImage.length > 0) {
+            return (
+                <div className="ui success message">
+                    <div className="header">
+                        Your image was successfully saved
+                    </div>
+                    <p>Double click another image to save instead</p>
+                </div>
+            );
+
+
+        }
+    }
+
     //when rendering list. need to seperate to another component
 
 
@@ -62,15 +89,19 @@ class CreatePlant extends Component {
     }
 
     render() {
+        let userMsg = <div></div>;
+        if (this.state.selectedImage.charAt(0) === "h") {
+            userMsg = <div className="ui green message">Your image was successfully saved</div>
+        }
+
         return (
             <div className="ui container">
                 <form onSubmit={e => e.preventDefault()}
-                    className="ui form"
+                    className="ui form error"
                 >
                     <div className="field">
                         <label>Plant name</label>
                         <Field name="name" component={this.renderInput}
-                            placeholder="Enter name of plant"
                         />
 
                     </div>
@@ -83,6 +114,7 @@ class CreatePlant extends Component {
 
                     </div>
 
+                    {userMsg}
 
                     <div className="field">
                         <div className="ui action input">
@@ -107,7 +139,7 @@ class CreatePlant extends Component {
 
                     <div className="field">
                         <label>Next Water Date</label>
-                        <Field name="date" type="date" onChange={this.handleFile} component={this.renderInput} />
+                        <Field name="date" type="date" component={this.renderInput} />
                     </div>
 
                     <div className="field">
@@ -124,9 +156,23 @@ class CreatePlant extends Component {
     }
 }
 
-export default connect(null, {
+const validate = (formValues) => {
+    let errors = {};
 
+    if (!formValues.name) {
+        errors.name = "You need to give your plant a name!"
+    }
+
+    if (!formValues.date) {
+        errors.date = "You might want to know when to water!"
+    }
+
+    return errors;
+}
+
+export default connect(null, {
     addPlant
 })(reduxForm({
-    form: 'createPlant'
+    form: 'createPlant',
+    validate: validate
 })(CreatePlant));

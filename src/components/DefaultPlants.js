@@ -11,6 +11,7 @@ class DefaultPlants extends Component {
         if (this.props.listView === true) {
             return (
                 <div className="ui centered cards">
+                    Log In to begin creating plants
                     {this.props.plants.map(plant => (
 
                         <PlantCard key={plant.name}

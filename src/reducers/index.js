@@ -66,6 +66,9 @@ function apiReducer(state = {}, action) {
     case GET_PLANTS:
       return { ...state, ..._.mapKeys(action.payload, '_id') };
 
+    case EDIT_PLANT:
+      return { ...state, [action.payload.id]: action.payload };
+
     case ADD_PLANT:
       return { ...state, [action.payload.id]: action.payload };
 

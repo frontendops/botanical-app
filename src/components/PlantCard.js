@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-import { } from '../actions'
+
 
 class PlantCard extends Component {
     componentDidMount() {
@@ -75,6 +75,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {
-
-})(PlantCard)
+export default connect(mapStateToProps)(PlantCard)
