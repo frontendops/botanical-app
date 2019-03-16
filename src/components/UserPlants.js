@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PlantCard from './PlantCard';
 import Notifications from './Notifications';
-
-import { getPlants, } from '../actions';
+import { Link } from "react-router-dom";
+import { getPlants } from '../actions';
 import { connect } from 'react-redux';
 
 
@@ -67,6 +67,7 @@ class UserPlants extends Component {
             return (
                 <div>
                     <Notifications dates={this.state.days} />
+
                     <div className="ui centered cards">
                         {this.renderUserPlants()}
 
@@ -77,11 +78,12 @@ class UserPlants extends Component {
             return (
                 <div>
                     <Notifications dates={this.state.days} />
+
                     <div className="ui four doubling cards">
                         {this.renderUserPlants()}
 
                     </div>
-                </div>
+                </div >
             )
         }
 

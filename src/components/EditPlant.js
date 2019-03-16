@@ -116,7 +116,7 @@ class EditPlant extends Component {
                     </div>
 
                     <div className="field">
-                        <label>Next Water Date</label>
+                        <label className="ui red header">Next Water Date</label>
                         <Field name="date" type="date" onChange={this.handleFile} component={this.renderInput} />
                     </div>
 

@@ -81,22 +81,6 @@ function apiReducer(state = {}, action) {
 }
 
 
-// const initialdays = {
-//   days: []
-// }
-
-
-// //add a new pair EACH TIME
-// function daysReducer(state = initialdays, action) {
-//   switch (action.type) {
-//     case GET_DAYS:
-//       return { ...state, days: state.days.concat({ days: action.payload.date, id: action.payload.id }) };
-
-//     default:
-//       return state;
-//   }
-// }
-
 const importantPlants = {
   amount: 0
 }

@@ -17,23 +17,37 @@ class PlantCard extends Component {
     render() {
         const { img, name, description, waterDate, id } = this.props
 
+        let waterNotif = <div></div>
+        let userDate = <span></span>
 
+        if (waterDate !== 0) {
+            userDate = <span className="date">Water in <b>{`${waterDate}`}</b> days </span>
+        } else {
+            userDate = <span className="date">Water today!! </span>
+        }
+
+        if (waterDate <= 4) {
+            waterNotif = <button className=" tiny ui blue button"> Water </button>
+        }
         return (
             <div className="ui card">
 
-                <Link to={`/view/${id}`} className="image">
+                <div className="image">
                     <img src={img} alt="plant name" />
-                </Link>
-
+                </div>
 
                 <div className="content">
                     <div className="header">{name}</div>
                     <div className="meta">
-                        <span className="date">Water in <b>{`${waterDate}`}</b> days </span>
+
+                        {userDate}
                     </div>
                     <div className="description">
                         {description}
                     </div>
+                    <Link to={`/edit/${id}`}>
+                        {waterNotif}
+                    </Link>
                 </div>
                 <div className="extra content">
                     <span className="right floated">

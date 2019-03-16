@@ -7,7 +7,7 @@ import CreatePlant from './CreatePlant';
 import PlantView from "./PlantView";
 import PlantNotes from "./PlantNotes";
 import EditPlant from './EditPlant';
-import DeletePlant from './DeletePlant'
+import DeletePlant from './DeletePlant';
 
 import history from '../history';
 

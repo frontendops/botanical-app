@@ -10,7 +10,7 @@ class ImageList extends Component {
         return (
             <div className="ui small images">
                 {this.props.images.map(image => (
-                    <img src={image.urls.small} key={image.id} onClick={e => this.sendData(e, image.urls.small)} />
+                    <img src={image.urls.small} key={image.id} alt={image.alt} onClick={e => this.sendData(e, image.urls.small)} />
                 ))}
             </div>
         )

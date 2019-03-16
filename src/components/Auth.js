@@ -38,7 +38,6 @@ class Auth extends Component {
     renderAuthButton = () => {
         let { isSignedIn } = this.props;
         if (isSignedIn === null) {
-            console.log('nothing');
         } else if (isSignedIn === true) {
             return (
                 <div className="ui olive button" onClick={this.onSignOutClick}>Sign Out</div>

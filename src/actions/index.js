@@ -16,13 +16,6 @@ export const signOut = () => {
     }
 }
 
-// export const getDays = (days) => {
-//     return {
-//         type: GET_DAYS,
-//         payload: days
-//     }
-
-// }
 
 //post request to add plant to our database
 export const addPlant = (formValues) => async (dispatch, getState) => {

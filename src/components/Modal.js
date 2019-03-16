@@ -10,15 +10,15 @@ const Modal = props => {
             <div className="ui standard modal visible active"
                 onClick={(e) => e.stopPropagation()}
             >
-                <div class="header">Delete Plant</div>
-                <div class="content">
+                <div className="header">Delete Plant</div>
+                <div className="content">
                     <p>Are you sure you want to delete this plant?</p>
                 </div>
-                <div class="actions">
-                    <div class="negative ui button"
+                <div className="actions">
+                    <div className="negative ui button"
                         onClick={() => props.deletePlant()}
                     >Delete</div>
-                    <div class="ui cancel button"
+                    <div className="ui cancel button"
                         onClick={() => history.push('/')}
                     >Cancel</div>
                 </div>
