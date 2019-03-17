@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react'
 import PlantCard from './PlantCard';
 import Notifications from './Notifications';
@@ -18,9 +19,9 @@ class UserPlants extends Component {
 
     renderUserPlants = () => {
         const currentUserId = this.props.currentUserData.userId;
-
+        const uniquePlants = _.uniqBy(this.props.userPlantData, '_id')
         return (
-            this.props.userPlantData.filter(user => user.userId === currentUserId).sort((a, b) => {
+            uniquePlants.filter(user => user.userId === currentUserId).sort((a, b) => {
                 return this.timeDifference(a.date) - this.timeDifference(b.date)
             }).map((plant) => (
                 <PlantCard key={plant.name}

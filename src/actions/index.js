@@ -20,11 +20,11 @@ export const signOut = () => {
 //post request to add plant to our database
 export const addPlant = (formValues) => async (dispatch, getState) => {
     const { userId } = getState().authReducer;
-    api.post('/api/plants/create', { ...formValues, userId })
-        .then(res => dispatch({
-            type: ADD_PLANT,
-            payload: res.data
-        }))
+    const response = await api.post('/api/plants/create', { ...formValues, userId })
+    dispatch({
+        type: ADD_PLANT,
+        payload: response.data
+    })
 
     history.push('/');
 };
@@ -33,12 +33,12 @@ export const addPlant = (formValues) => async (dispatch, getState) => {
 
 //get all plants from our db
 export const getPlants = () => async dispatch => {
+    const response = await api.get('/api/plants/')
 
-    api.get('/api/plants/')
-        .then(res => dispatch({
-            type: GET_PLANTS,
-            payload: res.data
-        }))
+    dispatch({
+        type: GET_PLANTS,
+        payload: response.data
+    })
 };
 
 //get individual plant

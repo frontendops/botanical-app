@@ -14,7 +14,7 @@ class EditPlant extends Component {
 
 
     //fetch the data on page reload!!!
-    componentWillMount = () => {
+    componentDidMount = () => {
         this.props.getPlants()
         this.setState({ userPlant: this.props.plant })
 
