@@ -18,6 +18,7 @@ class UserPlants extends Component {
 
 
     renderUserPlants = () => {
+
         const currentUserId = this.props.currentUserData.userId;
         const uniquePlants = _.uniqBy(this.props.userPlantData, '_id')
         return (
