@@ -1,5 +1,5 @@
 # Botanical plant tracking app
-This is the client side(Front End) of the app to track your plants. users can log in with Google and access their data. Create, delete and edit your plants, upload pictures as well as receive notifications on when you need to add water or transfer your plants.
+This is the client side of the app to track your plants. Users can log in with Google and access their data. Create, delete and edit your plants. Upload pictures and receive notifications when you need to add water or transfer your plants.
 
 ## Full project online!
 https://evening-refuge-33971.herokuapp.com/
